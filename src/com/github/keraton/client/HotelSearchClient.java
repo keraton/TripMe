@@ -9,15 +9,14 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class FlightSearchClient {
+public class HotelSearchClient {
 
     private static final String FLIGHT_AFFILIATE_SEARCH =
-            "https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search";
+            "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport";
 
     private static final String API_KEY = "1FOp7CUKzr04JBIzRl5Weol08aqD7sfn";
 
-    public String getFlight(String origin,
-                            String destination,
+    public String getHotels(String location,
                             String departureDate,
                             String returnDate) throws URISyntaxException {
 
@@ -27,24 +26,22 @@ public class FlightSearchClient {
 
         URI uri = new URIBuilder(FLIGHT_AFFILIATE_SEARCH)
                                             .addParameter("apikey", API_KEY)
-                                            .addParameter("origin", origin)
-                                            .addParameter("destination", destination)
-                                            .addParameter("departure_date", departureDate)
-                                            .addParameter("return_date", returnDate)
+                                            .addParameter("location", location)
+                                            .addParameter("check_in", departureDate)
+                                            .addParameter("check_out", returnDate)
                                             .build();
 
-        HttpGet getFlightSearch = new HttpGet(uri);
+        HttpGet getHotelSearch = new HttpGet(uri);
 
-        String result = HttpToStringClient.execute(httpClient, getFlightSearch);
+        String result = HttpToStringClient.execute(httpClient, getHotelSearch);
 
         return result;
     }
 
 
     public static void  main(String... args) throws URISyntaxException {
-        FlightSearchClient flightSearchClient = new FlightSearchClient();
-        String result = flightSearchClient.getFlight("LON",
-                                                    "DUB",
+        HotelSearchClient hotelSearchClient = new HotelSearchClient();
+        String result = hotelSearchClient.getHotels("DUB",
                                                     "2018-06-25",
                                                     "2018-06-27");
 

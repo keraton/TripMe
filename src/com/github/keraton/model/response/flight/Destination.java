@@ -1,14 +1,17 @@
 
-package com.github.keraton.model.response;
+package com.github.keraton.model.response.flight;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Origin {
+public class Destination {
 
     @SerializedName("airport")
     @Expose
     private String airport;
+    @SerializedName("terminal")
+    @Expose
+    private String terminal;
 
     public String getAirport() {
         return airport;
@@ -16,6 +19,14 @@ public class Origin {
 
     public void setAirport(String airport) {
         this.airport = airport;
+    }
+
+    public String getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(String terminal) {
+        this.terminal = terminal;
     }
 
 }

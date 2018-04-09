@@ -1,5 +1,5 @@
 
-package com.github.keraton.model.response;
+package com.github.keraton.model.response.flight;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

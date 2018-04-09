@@ -2,7 +2,7 @@ package com.github.keraton.service;
 
 import com.github.keraton.client.FlightSearchClient;
 import com.github.keraton.model.request.FlightRequest;
-import com.github.keraton.model.response.FlightResults;
+import com.github.keraton.model.response.flight.FlightResults;
 import com.google.gson.Gson;
 
 import java.net.URISyntaxException;

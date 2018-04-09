@@ -1,21 +1,21 @@
 
-package com.github.keraton.model.response;
+package com.github.keraton.model.response.hotel;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FlightResults {
+public class HotelResults {
 
     @SerializedName("results")
     @Expose
-    private List<FlightResult> results = null;
+    private List<HotelResult> results = null;
 
-    public List<FlightResult> getResults() {
+    public List<HotelResult> getResults() {
         return results;
     }
 
-    public void setResults(List<FlightResult> results) {
+    public void setResults(List<HotelResult> results) {
         this.results = results;
     }
 
