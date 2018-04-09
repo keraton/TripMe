@@ -2,3 +2,4 @@
 /.idea
 trip-planner.iml
 /.idea/vcs.xml
+/out/**
