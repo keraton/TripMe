@@ -14,7 +14,7 @@ public class HotelSearchClient {
     private static final String FLIGHT_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport";
 
-    private static final String API_KEY = "1FOp7CUKzr04JBIzRl5Weol08aqD7sfn";
+    private static final String API_KEY = "0DFGZzo4o3n2FTuPl9NfIjNA5zWpZvRs";
 
     public String getHotels(String location,
                             String departureDate,
