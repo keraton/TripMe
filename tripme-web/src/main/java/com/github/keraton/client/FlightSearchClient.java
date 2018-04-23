@@ -1,14 +1,15 @@
 package com.github.keraton.client;
 
-import com.github.keraton.utils.HttpToStringClient;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import com.github.keraton.model.response.flight.FlightResults;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@Component
 public class FlightSearchClient {
 
     private static final String FLIGHT_AFFILIATE_SEARCH =
@@ -16,14 +17,16 @@ public class FlightSearchClient {
 
     private static final String API_KEY = "0DFGZzo4o3n2FTuPl9NfIjNA5zWpZvRs";
 
-    public String getFlight(String origin,
+    private final RestTemplate restTemplate;
+
+    public FlightSearchClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    public FlightResults getFlight(String origin,
                             String destination,
                             String departureDate,
                             String returnDate) throws URISyntaxException {
-
-        HttpClient httpClient = HttpClientBuilder
-                                            .create()
-                                            .build();
 
         URI uri = new URIBuilder(FLIGHT_AFFILIATE_SEARCH)
                                             .addParameter("apikey", API_KEY)
@@ -33,22 +36,10 @@ public class FlightSearchClient {
                                             .addParameter("return_date", returnDate)
                                             .build();
 
-        HttpGet getFlightSearch = new HttpGet(uri);
+        ResponseEntity<FlightResults> forEntity = this.restTemplate.getForEntity(uri, FlightResults.class);
 
-        String result = HttpToStringClient.execute(httpClient, getFlightSearch);
-
-        return result;
+        return forEntity.getBody();
     }
 
 
-    public static void  main(String... args) throws URISyntaxException {
-        FlightSearchClient flightSearchClient = new FlightSearchClient();
-        String result = flightSearchClient.getFlight("LON",
-                                                    "DUB",
-                                                    "2018-06-25",
-                                                    "2018-06-27");
-
-        System.out.println("Result : " + result);
-
-    }
 }

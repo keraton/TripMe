@@ -1,37 +1,16 @@
 
 package com.github.keraton.model.response.flight;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class FlightResult {
 
-    @SerializedName("outbound")
-    @Expose
     private Bound outbound;
-    @SerializedName("inbound")
-    @Expose
     private Bound inbound;
-    @SerializedName("fare")
-    @Expose
     private Fare fare;
-    @SerializedName("cabin_code")
-    @Expose
     private String cabinCode;
-    @SerializedName("fare_family")
-    @Expose
     private String fareFamily;
-    @SerializedName("travel_class")
-    @Expose
     private String travelClass;
-    @SerializedName("merchant")
-    @Expose
     private String merchant;
-    @SerializedName("airline")
-    @Expose
     private String airline;
-    @SerializedName("deep_link")
-    @Expose
     private String deepLink;
 
     public Bound getOutbound() {

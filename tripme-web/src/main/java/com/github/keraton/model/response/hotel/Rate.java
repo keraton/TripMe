@@ -1,22 +1,11 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Rate {
 
-    @SerializedName("start_date")
-    @Expose
     private String startDate;
-    @SerializedName("end_date")
-    @Expose
     private String endDate;
-    @SerializedName("currency_code")
-    @Expose
     private String currencyCode;
-    @SerializedName("price")
-    @Expose
     private Double price;
 
     public String getStartDate() {

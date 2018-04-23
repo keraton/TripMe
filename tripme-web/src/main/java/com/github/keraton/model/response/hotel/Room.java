@@ -2,34 +2,16 @@
 package com.github.keraton.model.response.hotel;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class Room {
 
-    @SerializedName("booking_code")
-    @Expose
     private String bookingCode;
-    @SerializedName("room_type_code")
-    @Expose
     private String roomTypeCode;
-    @SerializedName("rate_plan_code")
-    @Expose
     private String ratePlanCode;
-    @SerializedName("total_amount")
-    @Expose
     private TotalAmount totalAmount;
-    @SerializedName("rates")
-    @Expose
     private List<Rate> rates = null;
-    @SerializedName("descriptions")
-    @Expose
     private List<String> descriptions = null;
-    @SerializedName("room_type_info")
-    @Expose
     private RoomTypeInfo roomTypeInfo;
-    @SerializedName("rate_type_code")
-    @Expose
     private String rateTypeCode;
 
     public String getBookingCode() {

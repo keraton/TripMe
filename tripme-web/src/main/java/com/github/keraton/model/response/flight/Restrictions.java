@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.flight;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Restrictions {
 
-    @SerializedName("refundable")
-    @Expose
     private Boolean refundable;
-    @SerializedName("change_penalties")
-    @Expose
     private Boolean changePenalties;
 
     public Boolean getRefundable() {

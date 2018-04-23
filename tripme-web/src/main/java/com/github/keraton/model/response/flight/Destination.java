@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.flight;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Destination {
 
-    @SerializedName("airport")
-    @Expose
     private String airport;
-    @SerializedName("terminal")
-    @Expose
     private String terminal;
 
     public String getAirport() {

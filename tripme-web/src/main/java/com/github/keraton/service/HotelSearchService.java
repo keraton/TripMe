@@ -3,32 +3,25 @@ package com.github.keraton.service;
 import com.github.keraton.client.HotelSearchClient;
 import com.github.keraton.model.request.HotelRequest;
 import com.github.keraton.model.response.hotel.HotelResults;
-import com.google.gson.Gson;
+import org.springframework.stereotype.Component;
 
 import java.net.URISyntaxException;
 
+@Component
 public class HotelSearchService {
 
     private final HotelSearchClient hotelSearchClient;
 
 
-    public HotelSearchService() {
-        hotelSearchClient = new HotelSearchClient();
+    public HotelSearchService(HotelSearchClient hotelSearchClient) {
+        this.hotelSearchClient = hotelSearchClient;
     }
 
     public HotelResults getHotelResults(HotelRequest request) {
         try {
-            String hotels = hotelSearchClient.getHotels(request.getLocation(), request.getCheckIn(), request.getCheckOut());
-
-            Gson gson = new Gson();
-            HotelResults hotelResults = gson.fromJson(hotels, HotelResults.class);
-
-            // TODO find the cheapest
-
-            return hotelResults;
+            return hotelSearchClient.getHotels(request.getLocation(), request.getCheckIn(), request.getCheckOut());
 
         } catch (URISyntaxException e) {
-            e.printStackTrace();
             return null;
         }
     }

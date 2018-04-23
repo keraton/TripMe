@@ -1,19 +1,10 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Amenity {
 
-    @SerializedName("amenity")
-    @Expose
     private String amenity;
-    @SerializedName("ota_code")
-    @Expose
     private Integer otaCode;
-    @SerializedName("description")
-    @Expose
     private String description;
 
     public String getAmenity() {

@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class TotalPrice {
 
-    @SerializedName("amount")
-    @Expose
     private String amount;
-    @SerializedName("currency")
-    @Expose
     private String currency;
 
     public String getAmount() {

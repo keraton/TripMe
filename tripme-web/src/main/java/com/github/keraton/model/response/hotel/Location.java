@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Location {
 
-    @SerializedName("latitude")
-    @Expose
     private Double latitude;
-    @SerializedName("longitude")
-    @Expose
     private Double longitude;
 
     public Double getLatitude() {

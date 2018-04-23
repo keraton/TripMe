@@ -1,19 +1,10 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class RoomTypeInfo {
 
-    @SerializedName("room_type")
-    @Expose
     private String roomType;
-    @SerializedName("bed_type")
-    @Expose
     private String bedType;
-    @SerializedName("number_of_beds")
-    @Expose
     private String numberOfBeds;
 
     public String getRoomType() {

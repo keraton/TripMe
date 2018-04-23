@@ -2,17 +2,11 @@ package com.github.keraton.model.response.trip;
 
 import com.github.keraton.model.response.flight.FlightResult;
 import com.github.keraton.model.response.hotel.HotelResult;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class TripResults {
 
-    @SerializedName("flight")
-    @Expose
     private FlightResult flight;
 
-    @SerializedName("hotel")
-    @Expose
     private HotelResult hotelResult;
 
     public FlightResult getFlight() {

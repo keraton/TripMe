@@ -1,13 +1,8 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class MoreRoomsAtThisHotel {
 
-    @SerializedName("href")
-    @Expose
     private String href;
 
     public String getHref() {

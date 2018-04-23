@@ -2,16 +2,10 @@
 package com.github.keraton.model.response.flight;
 
 import java.util.List;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 
 public class Bound {
 
-    @SerializedName("duration")
-    @Expose
     private String duration;
-    @SerializedName("flights")
-    @Expose
     private List<Flight> flights = null;
 
     public String getDuration() {

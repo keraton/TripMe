@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.flight;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class PricePerAdult {
 
-    @SerializedName("tax")
-    @Expose
     private String tax;
-    @SerializedName("total_fare")
-    @Expose
     private String totalFare;
 
     public String getTax() {

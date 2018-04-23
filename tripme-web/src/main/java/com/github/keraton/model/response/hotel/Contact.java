@@ -1,16 +1,9 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Contact {
 
-    @SerializedName("type")
-    @Expose
     private String type;
-    @SerializedName("detail")
-    @Expose
     private String detail;
 
     public String getType() {

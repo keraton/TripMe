@@ -1,51 +1,42 @@
 package com.github.keraton.client;
 
-import com.github.keraton.utils.HttpToStringClient;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import com.github.keraton.model.response.hotel.HotelResults;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@Component
 public class HotelSearchClient {
 
-    private static final String FLIGHT_AFFILIATE_SEARCH =
+    private static final String HOTEL_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/hotels/search-airport";
 
     private static final String API_KEY = "0DFGZzo4o3n2FTuPl9NfIjNA5zWpZvRs";
 
-    public String getHotels(String location,
-                            String departureDate,
-                            String returnDate) throws URISyntaxException {
+    private final RestTemplate restTemplate;
 
-        HttpClient httpClient = HttpClientBuilder
-                                            .create()
-                                            .build();
+    public HotelSearchClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
-        URI uri = new URIBuilder(FLIGHT_AFFILIATE_SEARCH)
+    public HotelResults getHotels(String location,
+                                  String departureDate,
+                                  String returnDate) throws URISyntaxException {
+
+        URI uri = new URIBuilder(HOTEL_AFFILIATE_SEARCH)
                                             .addParameter("apikey", API_KEY)
                                             .addParameter("location", location)
                                             .addParameter("check_in", departureDate)
                                             .addParameter("check_out", returnDate)
                                             .build();
 
-        HttpGet getHotelSearch = new HttpGet(uri);
 
-        String result = HttpToStringClient.execute(httpClient, getHotelSearch);
+        ResponseEntity<HotelResults> forEntity = restTemplate.getForEntity(uri, HotelResults.class);
 
-        return result;
-    }
-
-
-    public static void  main(String... args) throws URISyntaxException {
-        HotelSearchClient hotelSearchClient = new HotelSearchClient();
-        String result = hotelSearchClient.getHotels("DUB",
-                                                    "2018-06-25",
-                                                    "2018-06-27");
-
-        System.out.println("Result : " + result);
-
+        return forEntity.getBody();
     }
 }

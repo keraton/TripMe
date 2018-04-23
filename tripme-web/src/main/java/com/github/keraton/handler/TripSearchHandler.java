@@ -1,21 +1,21 @@
 package com.github.keraton.handler;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.keraton.model.request.FlightRequest;
 import com.github.keraton.model.request.HotelRequest;
-import com.github.keraton.model.response.flight.FlightResult;
 import com.github.keraton.model.response.flight.FlightResults;
 import com.github.keraton.model.response.hotel.HotelResults;
 import com.github.keraton.model.response.trip.TripResults;
 import com.github.keraton.service.FlightSearchService;
 import com.github.keraton.service.HotelSearchService;
 import com.github.keraton.utils.HttpQueryUtil;
-import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Comparator;
 import java.util.Map;
 
 import static java.lang.Double.parseDouble;
@@ -24,14 +24,18 @@ import static java.lang.Double.parseDouble;
  * Search handler for Flight, Train and Hotel
  *
  */
+@Component
 public class TripSearchHandler implements HttpHandler {
 
     private final FlightSearchService flightSearchService;
     private final HotelSearchService hotelSearchService;
+    private final ObjectMapper mapper;
 
-    public TripSearchHandler() {
-        this.flightSearchService = new FlightSearchService();
-        this.hotelSearchService = new HotelSearchService();
+    public TripSearchHandler(HotelSearchService hotelSearchService,
+                             FlightSearchService flightSearchService, ObjectMapper mapper) {
+        this.flightSearchService = flightSearchService;
+        this.hotelSearchService = hotelSearchService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -49,9 +53,6 @@ public class TripSearchHandler implements HttpHandler {
 
         FlightResults flightResult = this.flightSearchService.getFlightResult(flightRequest);
 
-        flightResult.getResults().sort((o1, o2) ->
-                (int) (parseDouble(o2.getFare().getTotalPrice()) - parseDouble(o1.getFare().getTotalPrice())));
-
         HotelRequest hotelRequest = new HotelRequest();
         hotelRequest.setLocation(queryToMap.get("destination"));
         hotelRequest.setCheckIn(queryToMap.get("departure"));
@@ -63,16 +64,10 @@ public class TripSearchHandler implements HttpHandler {
         tripResults.setFlight(flightResult.getResults().get(0));
         tripResults.setHotel(hotelResults.getResults().get(0));
 
-        Gson gson = new Gson();
-        String response = gson.toJson(tripResults);
-
-        sendRespond(httpExchange, response);
-    }
-
-    private void sendRespond(HttpExchange t, String response) throws IOException {
-        t.sendResponseHeaders(200, response.length());
-        OutputStream os = t.getResponseBody();
-        os.write(response.getBytes());
+        OutputStream os = httpExchange.getResponseBody();
+        mapper.writeValue(os, tripResults);
+        httpExchange.sendResponseHeaders(200, -1);
         os.close();
     }
+
 }

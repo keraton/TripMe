@@ -1,22 +1,11 @@
 
 package com.github.keraton.model.response.hotel;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class Address {
 
-    @SerializedName("line1")
-    @Expose
     private String line1;
-    @SerializedName("city")
-    @Expose
     private String city;
-    @SerializedName("postal_code")
-    @Expose
     private String postalCode;
-    @SerializedName("country")
-    @Expose
     private String country;
 
     public String getLine1() {
