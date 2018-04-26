@@ -49,3 +49,10 @@ In short, Archetype is a Maven project templating toolkit.
 ### Local repository
 ### Remote repository
 ### Maven Central
+
+## Exercises 
+
+* Mavenize the project
+* Maven with multi module
+* Add some test and run it with Unit test and IT Test
+* Introduction to Egencia Maven Archetypes

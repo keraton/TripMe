@@ -15,7 +15,7 @@ public class FlightSearchClient {
     private static final String FLIGHT_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search";
 
-    private static final String API_KEY = "0DFGZzo4o3n2FTuPl9NfIjNA5zWpZvRs";
+    private static final String API_KEY = "CHANGE-WITH-REAL-ONE";
 
     private final RestTemplate restTemplate;
 
