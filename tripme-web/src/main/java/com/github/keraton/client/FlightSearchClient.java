@@ -2,6 +2,7 @@ package com.github.keraton.client;
 
 import com.github.keraton.model.response.flight.FlightResults;
 import org.apache.http.client.utils.URIBuilder;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -15,12 +16,13 @@ public class FlightSearchClient {
     private static final String FLIGHT_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search";
 
-    private static final String API_KEY = "CHANGE-WITH-REAL-ONE";
+    private final String apiKey;
 
     private final RestTemplate restTemplate;
 
-    public FlightSearchClient(RestTemplate restTemplate) {
+    public FlightSearchClient(RestTemplate restTemplate, Environment environment) {
         this.restTemplate = restTemplate;
+        this.apiKey = environment.getProperty("apiKey");
     }
 
     public FlightResults getFlight(String origin,
@@ -29,7 +31,7 @@ public class FlightSearchClient {
                             String returnDate) throws URISyntaxException {
 
         URI uri = new URIBuilder(FLIGHT_AFFILIATE_SEARCH)
-                                            .addParameter("apikey", API_KEY)
+                                            .addParameter("apikey", apiKey)
                                             .addParameter("origin", origin)
                                             .addParameter("destination", destination)
                                             .addParameter("departure_date", departureDate)

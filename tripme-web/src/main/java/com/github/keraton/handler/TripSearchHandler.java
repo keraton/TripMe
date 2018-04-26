@@ -12,13 +12,10 @@ import com.github.keraton.utils.HttpQueryUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
-
-import static java.lang.Double.parseDouble;
 
 /**
  * Search handler for Flight, Train and Hotel
@@ -64,9 +61,15 @@ public class TripSearchHandler implements HttpHandler {
         tripResults.setFlight(flightResult.getResults().get(0));
         tripResults.setHotel(hotelResults.getResults().get(0));
 
-        OutputStream os = httpExchange.getResponseBody();
-        mapper.writeValue(os, tripResults);
-        httpExchange.sendResponseHeaders(200, -1);
+        String value = mapper.writeValueAsString(tripResults);
+
+        sendRespond(httpExchange, value);
+    }
+
+    private void sendRespond(HttpExchange t, String response) throws IOException {
+        t.sendResponseHeaders(200, response.length());
+        OutputStream os = t.getResponseBody();
+        os.write(response.getBytes());
         os.close();
     }
 
