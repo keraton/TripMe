@@ -2,6 +2,7 @@ package com.github.keraton.configuration;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,9 @@ public class TripmeConfig {
 
     @Bean
     ObjectMapper mapper(){
-      return new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        return objectMapper;
     }
 
     @Bean
@@ -21,4 +24,5 @@ public class TripmeConfig {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate;
     }
+
 }

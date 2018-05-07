@@ -23,6 +23,8 @@ public class ApplicationMain {
         //server.setExecutor(null); // creates a default executor
         server.setExecutor(Executors.newFixedThreadPool(100)); // creates a default executor
         server.start();
+
+        ((AnnotationConfigApplicationContext) ctxJavaConfig).registerShutdownHook();
     }
 
 }

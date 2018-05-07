@@ -11,7 +11,11 @@ import com.github.keraton.service.HotelSearchService;
 import com.github.keraton.utils.HttpQueryUtil;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import javax.inject.Provider;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -22,17 +26,21 @@ import java.util.Map;
  *
  */
 @Component
-public class TripSearchHandler implements HttpHandler {
+public class TripSearchHandler implements HttpHandler, ApplicationContextAware {
 
     private final FlightSearchService flightSearchService;
     private final HotelSearchService hotelSearchService;
     private final ObjectMapper mapper;
+    private ApplicationContext applicationContext;
+    private final Provider<FlightRequest> flightRequestProvider;
 
     public TripSearchHandler(HotelSearchService hotelSearchService,
-                             FlightSearchService flightSearchService, ObjectMapper mapper) {
+                             FlightSearchService flightSearchService, ObjectMapper mapper,
+                             Provider<FlightRequest> flightRequestProvider) {
         this.flightSearchService = flightSearchService;
         this.hotelSearchService = hotelSearchService;
         this.mapper = mapper;
+        this.flightRequestProvider = flightRequestProvider;
     }
 
     @Override
@@ -42,7 +50,10 @@ public class TripSearchHandler implements HttpHandler {
 
         System.out.println("Trip Search with " + query);
 
-        FlightRequest flightRequest = new FlightRequest();
+        //FlightRequest flightRequest = this.applicationContext.getBean(FlightRequest.class);
+        FlightRequest flightRequest = flightRequestProvider.get();
+        System.out.println(flightRequest.hashCode());
+
         flightRequest.setOrigin(queryToMap.get("origin"));
         flightRequest.setDestination(queryToMap.get("destination"));
         flightRequest.setDeparture(queryToMap.get("departure"));
@@ -73,4 +84,8 @@ public class TripSearchHandler implements HttpHandler {
         os.close();
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 }

@@ -2,6 +2,9 @@ package com.github.keraton.client;
 
 import com.github.keraton.model.response.flight.FlightResults;
 import org.apache.http.client.utils.URIBuilder;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,7 +14,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Component
-public class FlightSearchClient {
+public class FlightSearchClient implements InitializingBean, DisposableBean {
 
     private static final String FLIGHT_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search";
@@ -19,6 +22,7 @@ public class FlightSearchClient {
     private final String apiKey;
 
     private final RestTemplate restTemplate;
+
 
     public FlightSearchClient(RestTemplate restTemplate, Environment environment) {
         this.restTemplate = restTemplate;
@@ -30,6 +34,8 @@ public class FlightSearchClient {
                             String departureDate,
                             String returnDate) throws URISyntaxException {
 
+        // Start timer
+
         URI uri = new URIBuilder(FLIGHT_AFFILIATE_SEARCH)
                                             .addParameter("apikey", apiKey)
                                             .addParameter("origin", origin)
@@ -40,8 +46,20 @@ public class FlightSearchClient {
 
         ResponseEntity<FlightResults> forEntity = this.restTemplate.getForEntity(uri, FlightResults.class);
 
+        // End Timer
+        // Calculate Timer
+
         return forEntity.getBody();
     }
 
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("The ApiKey " + apiKey);
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("Bean Destroyed");
+    }
 }
