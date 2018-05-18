@@ -1,5 +1,6 @@
 package com.github.keraton.client;
 
+import com.github.keraton.aop.LoggingTime;
 import com.github.keraton.model.response.hotel.HotelResults;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.core.env.Environment;
@@ -25,6 +26,7 @@ public class HotelSearchClient {
         apiKey = environment.getProperty("apiKey");
     }
 
+    @LoggingTime
     public HotelResults getHotels(String location,
                                   String departureDate,
                                   String returnDate) throws URISyntaxException {

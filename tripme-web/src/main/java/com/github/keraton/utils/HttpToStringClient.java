@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class HttpToStringClient {
+    
 
     public static String execute(HttpClient httpClient, HttpGet getHotelSearch) {
         String result = "";

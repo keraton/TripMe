@@ -1,5 +1,6 @@
 package com.github.keraton.client;
 
+import com.github.keraton.aop.LoggingTime;
 import com.github.keraton.model.response.flight.FlightResults;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.DisposableBean;
@@ -29,6 +30,7 @@ public class FlightSearchClient implements InitializingBean, DisposableBean {
         this.apiKey = environment.getProperty("apiKey");
     }
 
+    @LoggingTime
     public FlightResults getFlight(String origin,
                             String destination,
                             String departureDate,
