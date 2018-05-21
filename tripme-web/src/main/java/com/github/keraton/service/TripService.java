@@ -1,7 +1,6 @@
 package com.github.keraton.service;
 
 import com.github.keraton.aop.LoggingTime;
-import com.github.keraton.configuration.ConfigContextHolder;
 import com.github.keraton.model.request.FlightRequest;
 import com.github.keraton.model.request.HotelRequest;
 import com.github.keraton.model.response.flight.FlightResults;
@@ -28,8 +27,6 @@ public class TripService {
     @LoggingTime
     public TripResults getTripResults(FlightRequest flightRequest, HotelRequest hotelRequest) {
 
-        ConfigContextHolder.addStripingParameter("key", "value " + i++);
-
 
         CompletableFuture<FlightResults> flightResultFuture = this.flightSearchService.getFlightResult(flightRequest);
 
@@ -52,7 +49,6 @@ public class TripService {
             tripResults.setFlight(flightResults.getResults().get(0));
             tripResults.setHotel(hotelResults.getResults().get(0));
 
-            System.out.println("TripService " + ConfigContextHolder.getStripingParameters().get("key"));
 
             return tripResults;
 

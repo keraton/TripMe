@@ -2,14 +2,12 @@ package com.github.keraton.client;
 
 import com.github.keraton.aop.LoggingTime;
 import com.github.keraton.model.response.hotel.HotelResults;
-import org.apache.http.client.utils.URIBuilder;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.net.URI;
-import java.net.URISyntaxException;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class HotelSearchClient {
@@ -29,17 +27,18 @@ public class HotelSearchClient {
     @LoggingTime
     public HotelResults getHotels(String location,
                                   String departureDate,
-                                  String returnDate) throws URISyntaxException {
+                                  String returnDate) {
 
-        URI uri = new URIBuilder(HOTEL_AFFILIATE_SEARCH)
-                                            .addParameter("apikey", apiKey)
-                                            .addParameter("location", location)
-                                            .addParameter("check_in", departureDate)
-                                            .addParameter("check_out", returnDate)
+
+        // Start timer
+        UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(HOTEL_AFFILIATE_SEARCH)
+                                            .queryParam("apikey", apiKey)
+                                            .queryParam("location", location)
+                                            .queryParam("check_in", departureDate)
+                                            .queryParam("check_out", returnDate)
                                             .build();
 
-
-        ResponseEntity<HotelResults> forEntity = restTemplate.getForEntity(uri, HotelResults.class);
+        ResponseEntity<HotelResults> forEntity = restTemplate.getForEntity(uriComponents.toUri(), HotelResults.class);
 
         return forEntity.getBody();
     }

@@ -1,10 +1,5 @@
 package com.github.keraton.model.request;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope("prototype")
 public class FlightRequest {
 
     private String origin;

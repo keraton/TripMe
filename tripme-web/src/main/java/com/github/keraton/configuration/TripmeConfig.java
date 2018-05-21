@@ -1,23 +1,26 @@
 package com.github.keraton.configuration;
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.github.keraton.model.request.FlightRequest;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.client.RestTemplate;
 
+import javax.inject.Provider;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Configuration
-@ComponentScan("com.github.keraton")
-@EnableAspectJAutoProxy
 @EnableAsync
 public class TripmeConfig  implements AsyncConfigurer {
 
@@ -25,19 +28,32 @@ public class TripmeConfig  implements AsyncConfigurer {
     ObjectMapper mapper(){
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
 
     @Bean
-    RestTemplate restTemplate() {
+    RestTemplate restTemplate(ObjectMapper objectMapper) {
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(aMessageConverter(objectMapper));
         return restTemplate;
+    }
+
+
+    private List<HttpMessageConverter<?>> aMessageConverter(ObjectMapper objectMapper) {
+        HttpMessageConverter<?> messageConverter = new MappingJackson2HttpMessageConverter();
+        ((MappingJackson2HttpMessageConverter) messageConverter).setObjectMapper(objectMapper);
+        return Arrays.asList(messageConverter);
     }
 
     @Override
     public Executor getAsyncExecutor() {
         return Executors.newFixedThreadPool(2);
-        //return executorService;
+    }
+
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return null;
     }
 
 }
