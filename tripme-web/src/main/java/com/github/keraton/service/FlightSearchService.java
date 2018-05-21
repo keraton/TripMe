@@ -20,7 +20,6 @@ public class FlightSearchService {
     @Async
     public CompletableFuture<FlightResults> getFlightResult(FlightRequest flightRequest) {
 
-
         try {
             FlightResults flight = flightSearchClient.getFlight(flightRequest.getOrigin(),
                     flightRequest.getDestination(),

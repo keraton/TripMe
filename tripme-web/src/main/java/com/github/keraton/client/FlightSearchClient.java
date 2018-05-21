@@ -2,6 +2,9 @@ package com.github.keraton.client;
 
 import com.github.keraton.aop.LoggingTime;
 import com.github.keraton.model.response.flight.FlightResults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -11,6 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class FlightSearchClient {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FlightSearchClient.class);
 
     private static final String FLIGHT_AFFILIATE_SEARCH =
             "https://api.sandbox.amadeus.com/v1.2/flights/affiliate-search";
@@ -26,10 +31,13 @@ public class FlightSearchClient {
     }
 
     @LoggingTime
+    @Cacheable("flights")
     public FlightResults getFlight(String origin,
                             String destination,
                             String departureDate,
                             String returnDate) {
+
+        LOGGER.info("Flight call");
 
         // Start timer
         UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(FLIGHT_AFFILIATE_SEARCH)
