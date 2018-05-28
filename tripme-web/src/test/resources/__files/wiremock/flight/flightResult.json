@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "outbound": {
+        "duration": "01:20",
+        "flights": [
+          {
+            "aircraft": "AR8",
+            "operating_airline": "WX",
+            "marketing_airline": "WX",
+            "flight_number": "113",
+            "departs_at": "2018-06-01T09:40",
+            "arrives_at": "2018-06-01T11:00",
+            "origin": {
+              "airport": "LCY"
+            },
+            "destination": {
+              "airport": "DUB",
+              "terminal": "1"
+            }
+          }
+        ]
+      },
+      "inbound": {
+        "duration": "01:20",
+        "flights": [
+          {
+            "aircraft": "AR8",
+            "operating_airline": "WX",
+            "marketing_airline": "WX",
+            "flight_number": "112",
+            "departs_at": "2018-06-02T10:10",
+            "arrives_at": "2018-06-02T11:30",
+            "origin": {
+              "airport": "DUB"
+            },
+            "destination": {
+              "airport": "LCY",
+              "terminal": null
+            }
+          }
+        ]
+      },
+      "fare": {
+        "currency": "EUR",
+        "total_price": "351.67",
+        "restrictions": {
+          "refundable": false,
+          "change_penalties": true
+        },
+        "price_per_adult": {
+          "tax": "90.67",
+          "total_fare": "351.67"
+        }
+      },
+      "cabin_code": "Y",
+      "fare_family": "VALUE",
+      "travel_class": "ECONOMY",
+      "merchant": "WX",
+      "airline": "WX",
+      "deep_link": "https://track.connect.travelaudience.com/dlv/verify_jwt/?params=eyJhbGciOiJIUzI1NiJ9.eyJhZmZfaWQiOjEwMTYsInVybCI6Imh0dHBzOi8vd3d3LmNpdHlqZXQuY29tL2Jvb2svTENZL0RVQi8xLWFkdWx0cy8wLWNoaWxkcmVuLzAtaW5mYW50LzIwMTgtMDYtMDEvMjAxOC0wNi0wMi9yZXR1cm4vP3RhbnNlbD1Wako4VjFneE1UTXNWa0ZNVlVWZVYxZ3hNVElzVmtGTVZVVjhNelV4TGpZM2ZFVlZVbnd6WVRVd1kyTmhOeTFrTW1NM0xUUmxPRFl0WWprM01pMHlPVFZoWm1SaE4yUTJaalI4VjFnJTI1M0QmYXBwZW5kX3RhbnNlbD10cnVlIiwib2ZmZXJfaWQiOiIzMCJ9.TpbfhKPmSKeRybooJfSPanredtfM7fV5UbVJluCx3IY"
+    }
+  ]
+}

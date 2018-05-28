@@ -1,0 +1,103 @@
+{
+  "results": [
+    {
+      "property_code": "PIDUBAWQ",
+      "property_name": "Premier Inn Dublin Airport",
+      "location": {
+        "latitude": 53.44501,
+        "longitude": -6.22601
+      },
+      "address": {
+        "line1": "Airside Retail Park",
+        "city": "Dublin",
+        "postal_code": "00",
+        "country": "IE"
+      },
+      "total_price": {
+        "amount": "125.82",
+        "currency": "USD"
+      },
+      "min_daily_rate": {
+        "amount": "125.82",
+        "currency": "USD"
+      },
+      "contacts": [
+        {
+          "type": "PHONE",
+          "detail": "+353 00353 18957777"
+        },
+        {
+          "type": "FAX",
+          "detail": "+353 0871 527 8313"
+        },
+        {
+          "type": "EMAIL",
+          "detail": "dublinairport.pi@premierinn.com"
+        },
+        {
+          "type": "URL",
+          "detail": "http://www.premierinn.com"
+        }
+      ],
+      "amenities": [
+        {
+          "amenity": "ELEVATORS",
+          "ota_code": 33,
+          "description": "Elevators"
+        },
+        {
+          "amenity": "FAMILY_PLAN",
+          "ota_code": 38,
+          "description": "Family plan"
+        },
+        {
+          "amenity": "",
+          "ota_code": 42,
+          "description": "Free parking"
+        },
+        {
+          "amenity": "",
+          "ota_code": 41,
+          "description": "Free airport shuttle"
+        },
+        {
+          "amenity": "",
+          "ota_code": 179,
+          "description": "Wireless internet connection in public areas"
+        }
+      ],
+      "awards": [],
+      "images": [],
+      "rooms": [
+        {
+          "booking_code": "C1KWKDDBS",
+          "room_type_code": "C1K",
+          "rate_plan_code": "WKD",
+          "total_amount": {
+            "amount": "125.82",
+            "currency": "USD"
+          },
+          "rates": [
+            {
+              "start_date": "2018-06-01",
+              "end_date": "2018-06-02",
+              "currency_code": "USD",
+              "price": 125.82
+            }
+          ],
+          "descriptions": [
+            "Double Room",
+            "1 King Bed"
+          ],
+          "room_type_info": {
+            "room_type": "Room with bath - Standard",
+            "bed_type": "King",
+            "number_of_beds": "1"
+          },
+          "rate_type_code": "WKD"
+        }
+      ],
+      "links": null
+    }
+  ]
+}
